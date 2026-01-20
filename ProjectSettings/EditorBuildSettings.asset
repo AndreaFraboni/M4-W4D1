@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Project/Scenes/Exercize1.unity
+    path: Assets/_Project/Scenes/mylevelstudy.unity
     guid: 43e008dd76b27b249b9d99da7185cfc3
   m_configObjects: {}
