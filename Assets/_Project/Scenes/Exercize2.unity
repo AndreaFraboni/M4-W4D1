@@ -662,10 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 74095568}
-  offset: {x: 0, y: 10, z: 0}
-  speedMouse: 5
-  bottomClamp: 20
-  upClamp: 20
+  sideOffset: 1.1
 --- !u!1001 &823469913381941744
 PrefabInstance:
   m_ObjectHideFlags: 0
