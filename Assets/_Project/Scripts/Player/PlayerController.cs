@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody _rb;
     private Mover _mover;
-   // private Rotator _rotator;
+    private Rotator _rotator;
     private PlayerShootController _shooter;
     
     private Camera _cam;
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         if (_mover == null) _mover = GetComponent<Mover>();
-       // if (_rotator == null) _rotator = GetComponent<Rotator>();
+        if (_rotator == null) _rotator = GetComponent<Rotator>();
         if (_shooter == null) _shooter = GetComponent<PlayerShootController>();
         if (_rb == null) _rb = GetComponent<Rigidbody>();
 
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        //Rotation();
+        Rotation();
 
         if (isJump) Jump();
         if (isDoubleJump) Jump();
@@ -73,9 +73,11 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
-        //Vector3 inputMove = new Vector3(h, 0, v);
-        //move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
-        Vector3 inputMove = transform.forward * v + transform.right * h;
+        Vector3 inputMove = new Vector3(h, 0, v);
+        move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
+        
+        //Vector3 inputMove = transform.forward * v + transform.right * h;
+       
         move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
 
     }
@@ -168,12 +170,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private void Rotation()
-    //{
-    //    if (!isAlive) return;
+    private void Rotation()
+    {
+        if (!isAlive) return;
 
-    //    if (_rotator != null) _rotator.SetRotation(move);
-    //}
+        if (_rotator != null) _rotator.SetRotation(move);
+    }
 
     private void Jump()
     {

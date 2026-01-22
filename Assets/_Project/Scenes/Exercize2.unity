@@ -159,12 +159,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1626570620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &414523448 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8594120630857391314, guid: 0058d812ed6e35745b457d5ebaac5ed6,
-    type: 3}
-  m_PrefabInstance: {fileID: 5756454644481796501}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &541942675
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +524,6 @@ GameObject:
   - component: {fileID: 1844608456}
   - component: {fileID: 1844608459}
   - component: {fileID: 1844608460}
-  - component: {fileID: 1844608461}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -668,28 +661,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545f17b5602000542bc297d81795dd19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 414523448}
-  offset: {x: -10, y: 10, z: -5}
-  speedMouse: 0
-  bottomClamp: 0
-  upClamp: 0
---- !u!114 &1844608461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844608455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 545f17b5602000542bc297d81795dd19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _target: {fileID: 74095568}
   offset: {x: 0, y: 10, z: 0}
-  speedMouse: 0
-  bottomClamp: 0
-  upClamp: 0
+  speedMouse: 5
+  bottomClamp: 20
+  upClamp: 20
 --- !u!1001 &823469913381941744
 PrefabInstance:
   m_ObjectHideFlags: 0
