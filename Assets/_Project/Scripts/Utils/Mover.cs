@@ -3,8 +3,10 @@ using static UnityEngine.EventSystems.StandaloneInputModule;
 
 public class Mover : MonoBehaviour
 {
-    private float _speed = 5.0f;    
+    private float _speed;    
+    
     private Rigidbody _rb;
+
     private Vector3 _inputMove;
 
     private void Awake()
@@ -27,7 +29,8 @@ public class Mover : MonoBehaviour
 
     public void SetAndNormalizeInput(Vector3 input)
     {
-        if (_inputMove.sqrMagnitude > 1f) _inputMove.Normalize();
+        if (input.sqrMagnitude > 1f) input.Normalize();
+
         SetInput(input);
     }
 
