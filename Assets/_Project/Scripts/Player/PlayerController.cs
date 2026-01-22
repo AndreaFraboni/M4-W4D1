@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         CheckJump();
         CheckFire();
 
-        CheckMouseLook();
+        //CheckMouseLook();
 
         if (isGrounded)
         {
@@ -74,12 +74,8 @@ public class PlayerController : MonoBehaviour
         v = Input.GetAxis("Vertical");
 
         Vector3 inputMove = new Vector3(h, 0, v);
-        move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
-        
-        //Vector3 inputMove = transform.forward * v + transform.right * h;
-       
-        move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
 
+        move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
     }
 
     private void CheckRun()
@@ -141,15 +137,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CheckMouseLook()
-    {
-        if (!isAlive) return;
+    //private void CheckMouseLook()
+    //{
+    //    if (!isAlive) return;
 
-        _mouseX = Input.GetAxis("Mouse X");
-        float yaw = _mouseX * _mouseSensitivityX * Time.deltaTime;
+    //    _mouseX = Input.GetAxis("Mouse X");
 
-        transform.Rotate(0f, yaw, 0f, Space.World);
-    }
+    //    float yaw = _mouseX * _mouseSensitivityX * Time.deltaTime;
+
+    //    transform.Rotate(0f, yaw, 0f, Space.World);
+    //}
 
     private void Move()
     {
