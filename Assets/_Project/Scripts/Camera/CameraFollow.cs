@@ -5,8 +5,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private GameObject _target;
     [SerializeField] private float sideOffset;
 
-    private Vector3 offset;
-    private Vector3 finalOffset;
+    private Vector3 cameraOffset;
 
     private void Awake()
     {
@@ -27,14 +26,13 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        offset = transform.position - _target.transform.position;
-        finalOffset = offset;
-        finalOffset.x += sideOffset;
+        cameraOffset = transform.position - _target.transform.position;
+        cameraOffset.x += sideOffset;
     }
 
     private void LateUpdate()
     {
-        transform.position = _target.transform.position + finalOffset;            
+        transform.position = _target.transform.position + cameraOffset;            
     }
 
 }
