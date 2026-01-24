@@ -7,9 +7,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _smooth = 10f;
     [SerializeField] private float _jumpForce = 5f;
     
-    [SerializeField] private float _mouseSensitivityX = 180f; 
-
-    private float _mouseX;
 
     private Rigidbody _rb;
     private Mover _mover;
@@ -20,16 +17,13 @@ public class PlayerController : MonoBehaviour
     private Ray _ray;
 
     private float v, h;
-
-    private Vector3 move;
-
-    private bool isJump = false;
-    private bool isDoubleJump = false;
-    private bool isDoubleJumpUsed = false;
+    private Vector3 currentDirection;
 
     private bool isAlive = true;
     public bool isGrounded = false;
-
+    private bool isJump = false;
+    private bool isDoubleJump = false;
+    private bool isDoubleJumpUsed = false;
     private bool isRunning = false;
 
     private void Awake()
@@ -73,9 +67,13 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
-        Vector3 inputMove = new Vector3(h, 0, v);
+        currentDirection = _cam.transform.forward * v + _cam.transform.right * h;
+        currentDirection.y = 0f;
 
-        move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
+        if (currentDirection.magnitude > 0.01f) currentDirection.Normalize();
+
+        // Vector3 inputMove = new Vector3(h, 0, v);
+        // move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
     }
 
     private void CheckRun()
@@ -157,12 +155,12 @@ public class PlayerController : MonoBehaviour
             if (isRunning)
             {
                 _mover.SetSpeed(_speed * 2);
-                _mover.SetAndNormalizeInput(move);
+                _mover.SetAndNormalizeInput(currentDirection);
             }
             else
             {
                 _mover.SetSpeed(_speed);
-                _mover.SetAndNormalizeInput(move);
+                _mover.SetAndNormalizeInput(currentDirection);
             }
         }
     }
@@ -171,7 +169,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isAlive) return;
 
-        if (_rotator != null) _rotator.SetRotation(move);
+        if (_rotator != null) _rotator.SetRotation(currentDirection);
     }
 
     private void Jump()
