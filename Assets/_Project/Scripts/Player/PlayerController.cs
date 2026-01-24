@@ -67,13 +67,13 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
-        currentDirection = _cam.transform.forward * v + _cam.transform.right * h;
-        currentDirection.y = 0f;
+        Vector3 targetDirection = Vector3.zero;
+        targetDirection = _cam.transform.forward * v + _cam.transform.right * h;
+        targetDirection.y = 0f;
 
-        if (currentDirection.magnitude > 0.01f) currentDirection.Normalize();
-
-        // Vector3 inputMove = new Vector3(h, 0, v);
-        // move = Vector3.Lerp(move, inputMove, _smooth * Time.deltaTime);
+        if (targetDirection.magnitude > 0.01f) targetDirection.Normalize();
+       
+        currentDirection = Vector3.Lerp(currentDirection, targetDirection, _smooth * Time.deltaTime);
     }
 
     private void CheckRun()
@@ -168,6 +168,9 @@ public class PlayerController : MonoBehaviour
     private void Rotation()
     {
         if (!isAlive) return;
+        
+        // se non stai davvero muovendo, non ruotare
+        if (currentDirection.sqrMagnitude < 0.0004f) return;
 
         if (_rotator != null) _rotator.SetRotation(currentDirection);
     }

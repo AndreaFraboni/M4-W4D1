@@ -37,7 +37,10 @@ public class Mover : MonoBehaviour
             Quaternion rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
             _rb.MoveRotation(rotation);
         }
-
+        else
+        {
+            _rb.velocity = new Vector3(0f, _rb.velocity.y, 0f); // azzero per non avere l'inerzia nel movimento finale dopo aver smesso di premere i tasti di movimento cosi si ferma subito
+        }
     }
 
     public void SetInput(Vector3 input)
