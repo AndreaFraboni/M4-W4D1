@@ -138,11 +138,8 @@ public class PlayerController : MonoBehaviour
     //private void CheckMouseLook()
     //{
     //    if (!isAlive) return;
-
     //    _mouseX = Input.GetAxis("Mouse X");
-
     //    float yaw = _mouseX * _mouseSensitivityX * Time.deltaTime;
-
     //    transform.Rotate(0f, yaw, 0f, Space.World);
     //}
 
