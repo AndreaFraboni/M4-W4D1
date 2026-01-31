@@ -14,14 +14,21 @@ public class OrbitalCamera : MonoBehaviour
     float yaw = 0f;
     float pitch = 0f;
 
-    [SerializeField] private float _startYaw = 0f;  
-    [SerializeField] private float _startPitch = 10f;
+    [SerializeField] private float _startYaw = 0f;
+    [SerializeField] private float _startPitch = 0f;
 
     private void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
+
+        yaw = _startYaw;
         pitch = _startPitch;
+        pitch = Mathf.Clamp(pitch, bottomClamp, topClamp);
+    }
+
+    private void Update()
+    {
     }
 
     private void LateUpdate()

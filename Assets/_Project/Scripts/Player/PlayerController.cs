@@ -6,13 +6,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed = 6.0f;
     [SerializeField] private float _smooth = 10f;
     [SerializeField] private float _jumpForce = 5f;
-    
 
     private Rigidbody _rb;
     private Mover _mover;
     private Rotator _rotator;
     private PlayerShootController _shooter;
-    
+
     private Camera _cam;
     private Ray _ray;
 
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour
         targetDirection.y = 0f;
 
         if (targetDirection.magnitude > 0.01f) targetDirection.Normalize();
-       
+
         currentDirection = Vector3.Lerp(currentDirection, targetDirection, _smooth * Time.deltaTime);
     }
 
@@ -165,7 +164,7 @@ public class PlayerController : MonoBehaviour
     private void Rotation()
     {
         if (!isAlive) return;
-        
+
         // se non stai davvero muovendo, non ruotare
         if (currentDirection.sqrMagnitude < 0.0004f) return;
 
