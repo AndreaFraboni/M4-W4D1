@@ -730,9 +730,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 74095578}
-  _mouseSensitivity: 3
-  bottomClamp: -30
-  topClamp: 30
+  _mouseSensitivity: 5
+  bottomClamp: -20
+  topClamp: 60
   _maxZoomDistance: 10
   _minZoomDistance: 2
   offset: {x: 0, y: 2, z: -5}

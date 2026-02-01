@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CameraController : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] float _mouseSensitivity = 3f;
 
-    [SerializeField] float bottomClamp = -30f;
-    [SerializeField] float topClamp = 30f;
+    [SerializeField] float bottomClamp = -20f;
+    [SerializeField] float topClamp = 60f;
 
     [SerializeField] float _maxZoomDistance = 10f;
     [SerializeField] float _minZoomDistance = 2f;
@@ -19,7 +20,6 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float _startYaw = 0f;
     [SerializeField] private float _startPitch = 0f;
-
     private float _yaw = 0f;
     private float _pitch = 0f;
 
@@ -30,23 +30,31 @@ public class CameraController : MonoBehaviour
         _pitch = Mathf.Clamp(_pitch, bottomClamp, topClamp);
     }
 
-
-    private void Update()
+    private void LateUpdate()
     {
 
         if (Input.GetMouseButton(1))
         {
-            transform.LookAt(_target);
+            //transform.LookAt(_target);
+            //_yaw = Input.GetAxis("Mouse X") * _mouseSensitivity;
+            //_pitch = Input.GetAxis("Mouse Y") * _mouseSensitivity;
+            //_pitch = Mathf.Clamp(_pitch, bottomClamp, topClamp);
+            //transform.eulerAngles += new Vector3(-_pitch, _yaw, 0);
 
-            _yaw = Input.GetAxis("Mouse X") * _mouseSensitivity;
-            _pitch = Input.GetAxis("Mouse Y") * _mouseSensitivity;
+            _yaw += Input.GetAxis("Mouse X") * _mouseSensitivity;
+            _pitch -= Input.GetAxis("Mouse Y") * _mouseSensitivity;
             _pitch = Mathf.Clamp(_pitch, bottomClamp, topClamp);
-            transform.eulerAngles += new Vector3(-_pitch, _yaw, 0);
+
+            Quaternion rotation = Quaternion.Euler(_pitch, _yaw, 0);
+            Vector3 desiredPosition = _target.position + rotation * offset;
+
+            Vector3 lookAt = _target.position + Vector3.up * 2;
+            Quaternion lookRotation = Quaternion.LookRotation(lookAt - desiredPosition);
+            transform.SetPositionAndRotation(desiredPosition, lookRotation);
         }
 
         orbitRadius -= Input.mouseScrollDelta.y / _mouseSensitivity;
         orbitRadius = Mathf.Clamp(orbitRadius, _minZoomDistance, _maxZoomDistance);
-
         transform.position = _target.position - transform.forward * orbitRadius;
 
     }
